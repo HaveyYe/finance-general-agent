@@ -37,7 +37,7 @@ stop_one() {
   rm -f "${pid_file}"
 }
 
-for name in finance-web document-rag mcp-gateway browser-mcp web-reader-mcp zai-mcp finance-mcp finance-provider; do
+for name in finance-streamlit finance-web document-rag mcp-gateway browser-mcp web-reader-mcp zai-mcp finance-mcp finance-provider; do
   stop_one "${name}"
 done
 

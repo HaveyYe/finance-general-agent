@@ -11,6 +11,7 @@ DO_NPM_INSTALL=1
 INSTALL_BROWSER=0
 RUN_SMOKE=0
 FORCE_RESTART=0
+RUN_STREAMLIT=0
 
 usage() {
   cat <<'USAGE'
@@ -21,6 +22,7 @@ Options:
   --skip-npm-install    Skip npm install checks.
   --install-browser     Run Playwright Chromium install before Browser MCP startup.
   --smoke               Run MCP smoke tests after startup.
+  --streamlit           Start the optional Streamlit UI on port 8501.
   --force               Stop known local services first, then start again.
   -h, --help            Show this help.
 
@@ -38,6 +40,7 @@ while [[ $# -gt 0 ]]; do
     --skip-npm-install) DO_NPM_INSTALL=0 ;;
     --install-browser) INSTALL_BROWSER=1 ;;
     --smoke) RUN_SMOKE=1 ;;
+    --streamlit) RUN_STREAMLIT=1 ;;
     --force) FORCE_RESTART=1 ;;
     -h|--help) usage; exit 0 ;;
     *) echo "Unknown option: $1" >&2; usage >&2; exit 1 ;;
@@ -213,7 +216,7 @@ stop_pid_file() {
 }
 
 stop_known_services() {
-  for name in finance-web document-rag mcp-gateway browser-mcp web-reader-mcp zai-mcp finance-mcp finance-provider; do
+  for name in finance-streamlit finance-web document-rag mcp-gateway browser-mcp web-reader-mcp zai-mcp finance-mcp finance-provider; do
     stop_pid_file "${name}"
   done
 }
@@ -327,12 +330,26 @@ npm_install_if_needed() {
   fi
 }
 
+ensure_streamlit_venv() {
+  local venv_dir="${RUN_DIR}/streamlit-venv"
+  if [[ ! -x "${venv_dir}/bin/python" ]]; then
+    echo "Creating Streamlit venv: ${venv_dir#${ROOT_DIR}/}"
+    python3 -m venv "${venv_dir}"
+  fi
+  echo "Installing Streamlit dependencies ..."
+  "${venv_dir}/bin/python" -m pip install -r "${ROOT_DIR}/streamlit-app/requirements.txt"
+}
+
 require_cmd mvn
 require_cmd java
 require_cmd npm
 require_cmd node
 require_cmd curl
 require_cmd lsof
+
+if [[ "${RUN_STREAMLIT}" -eq 1 ]]; then
+  require_cmd python3
+fi
 
 if [[ "${RUN_SMOKE}" -eq 1 ]]; then
   require_cmd jq
@@ -353,6 +370,10 @@ npm_install_if_needed "${ROOT_DIR}/mcp/integrated-browser-server"
 npm_install_if_needed "${ROOT_DIR}/mcp/document-rag-server"
 npm_install_if_needed "${ROOT_DIR}/mcp/mcp-gateway"
 npm_install_if_needed "${ROOT_DIR}/finance-web"
+
+if [[ "${RUN_STREAMLIT}" -eq 1 ]]; then
+  ensure_streamlit_venv
+fi
 
 if [[ "${INSTALL_BROWSER}" -eq 1 ]]; then
   echo "Installing Playwright Chromium ..."
@@ -410,6 +431,16 @@ wait_http http://localhost:9000/health mcp-gateway "${LOG_DIR}/mcp-gateway.log"
 start_bg finance-web "${ROOT_DIR}/finance-web" 5173 npm run dev
 wait_http http://localhost:5173 finance-web "${LOG_DIR}/finance-web.log"
 
+if [[ "${RUN_STREAMLIT}" -eq 1 ]]; then
+  start_bg finance-streamlit "${ROOT_DIR}" 8501 env GATEWAY_BASE_URL=http://localhost:9000 STREAMLIT_BROWSER_GATHER_USAGE_STATS=false "${RUN_DIR}/streamlit-venv/bin/streamlit" run streamlit-app/app.py --server.address 0.0.0.0 --server.port 8501 --server.headless true --browser.gatherUsageStats false
+  wait_http http://localhost:8501/_stcore/health finance-streamlit "${LOG_DIR}/finance-streamlit.log"
+fi
+
+STREAMLIT_URL_LINE=""
+if [[ "${RUN_STREAMLIT}" -eq 1 ]]; then
+  STREAMLIT_URL_LINE="  Streamlit:    http://localhost:8501"
+fi
+
 if [[ "${RUN_SMOKE}" -eq 1 ]]; then
   echo "Running smoke tests ..."
   (cd "${ROOT_DIR}" && bash mcp/scripts/smoke-test.sh)
@@ -422,6 +453,7 @@ Finance General Agent started.
 
 URLs:
   Web:          http://localhost:5173
+${STREAMLIT_URL_LINE}
   DingTalk sim: http://localhost:5173/chat?channel=dingtalk&corpId=demo-corp&userId=zhangsan&userName=张三
   Gateway:      http://localhost:9000
   Gateway MCP:  http://localhost:9000/mcp

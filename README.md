@@ -33,6 +33,7 @@
 - `mcp/integrated-browser-server`: Playwright 浏览器自动化 MCP 服务，提供 22 个导航、表单、读取与会话管理工具。
 - `mcp/mcp-gateway`: MCP 统一入口，聚合多个 MCP Server 的工具清单并按工具名路由。
 - `finance-web`: 财务数智人 Web 前端，提供对话、驾驶舱、发票、报表页面。
+- `streamlit-app`: Streamlit 版轻量入口，复用 `mcp-gateway` 的 Agent 对话和结构化结果。
 
 ## Build
 
@@ -87,6 +88,22 @@ npm install
 npm run dev
 ```
 
+启动 Streamlit 版入口：
+
+```bash
+scripts/start-all.sh --streamlit
+```
+
+或在 Gateway 已启动后单独运行：
+
+```bash
+python3 -m venv .run/streamlit-venv
+.run/streamlit-venv/bin/python -m pip install -r streamlit-app/requirements.txt
+GATEWAY_BASE_URL=http://localhost:9000 STREAMLIT_BROWSER_GATHER_USAGE_STATS=false \
+  .run/streamlit-venv/bin/streamlit run streamlit-app/app.py \
+  --server.headless true --server.port 8501
+```
+
 ## DingTalk Entry Demo
 
 前端已内置钉钉应用入口上下文骨架，支持本地模拟：
@@ -132,6 +149,7 @@ scripts/start-all.sh
 ```bash
 scripts/start-all.sh --force          # 先停止脚本记录的旧进程，再重新启动
 scripts/start-all.sh --smoke          # 启动后执行基础 MCP 冒烟测试
+scripts/start-all.sh --streamlit      # 额外启动 Streamlit 入口
 scripts/start-all.sh --install-browser # 启动前安装 Playwright Chromium
 scripts/start-all.sh --no-build --skip-npm-install # 跳过构建和 npm install，加快二次启动
 ```
@@ -140,6 +158,7 @@ scripts/start-all.sh --no-build --skip-npm-install # 跳过构建和 npm install
 
 ```text
 http://localhost:5173
+http://localhost:8501  # 仅在使用 --streamlit 时启动
 http://localhost:5173/chat?channel=dingtalk&corpId=demo-corp&userId=zhangsan&userName=张三
 ```
 
