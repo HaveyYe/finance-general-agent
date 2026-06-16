@@ -1,0 +1,12 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2044,
+  "method": "tools/call",
+  "params": {
+    "name": "check_invoice",
+    "arguments": {
+      "invoiceCode": "CODE-INV-202605-001",
+      "invoiceNo": "INV-202605-001"
+    }
+  }
+}

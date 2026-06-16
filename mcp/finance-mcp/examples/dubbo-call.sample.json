@@ -1,0 +1,22 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1001,
+  "method": "tools/call",
+  "params": {
+    "name": "dubbo_call",
+    "arguments": {
+      "interfaceName": "com.xxx.finance.ArDashboardService",
+      "methodName": "queryOverview",
+      "parameterTypes": [
+        "java.lang.String"
+      ],
+      "args": [
+        "2026-05"
+      ],
+      "group": "finance",
+      "version": "1.0.0",
+      "registryAddress": "zookeeper://127.0.0.1:2181",
+      "timeoutMs": 5000
+    }
+  }
+}

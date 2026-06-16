@@ -1,0 +1,26 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2003,
+  "method": "tools/call",
+  "params": {
+    "name": "create_voucher",
+    "arguments": {
+      "voucherDate": "2026-05-31",
+      "summary": "销售回款入账",
+      "entries": [
+        {
+          "accountCode": "1002",
+          "accountName": "银行存款",
+          "debitAmount": 120000,
+          "creditAmount": 0
+        },
+        {
+          "accountCode": "1122",
+          "accountName": "应收账款",
+          "debitAmount": 0,
+          "creditAmount": 120000
+        }
+      ]
+    }
+  }
+}

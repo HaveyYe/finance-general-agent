@@ -1,0 +1,21 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "input_invoice",
+    "arguments": {
+      "invoiceCode": "CODE-INV-202606-009",
+      "invoiceNo": "INV-202606-009",
+      "invoiceDate": "2026-06-03",
+      "invoiceType": "增值税专用发票",
+      "buyerName": "杭州云启科技有限公司",
+      "sellerName": "杭州差旅服务有限公司",
+      "amount": 3600,
+      "taxAmount": 216,
+      "source": "DINGTALK",
+      "fileHash": "HASH-INV-202606-009",
+      "autoVerify": true
+    }
+  }
+}

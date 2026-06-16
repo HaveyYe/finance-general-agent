@@ -1,0 +1,76 @@
+server:
+  port: ${MCP_SERVER_PORT:8086}
+
+spring:
+  application:
+    name: finance-contract-mcp-server
+
+dubbo:
+  application:
+    qos-enable: false
+  registry:
+    address: N/A
+  metadata-report:
+    address: N/A
+  consumer:
+    check: false
+
+logging:
+  level:
+    root: INFO
+    org.apache.dubbo: INFO
+
+finance:
+  mcp:
+    auth:
+      enabled: false
+      token:
+      header-name: Authorization
+    identity:
+      token-header: X-Finance-Token
+      operator-id-header: X-Operator-Id
+      operator-name-header: X-Operator-Name
+    safety:
+      write-enabled: false
+      write-confirm-token: ${MCP_WRITE_CONFIRM_TOKEN:}
+      admin-user-ids: []
+    include-default-tools: true
+    expose-generic-dubbo-call: false
+    tools: []
+  dubbo:
+    application-name: ${DUBBO_APPLICATION_NAME:${dubbo.application.name:${dubbo.name:finance-contract-mcp-server}}}
+    direct-url: ${FINANCE_DUBBO_DIRECT_URL:}
+    registry: ${FINANCE_DUBBO_REGISTRY:${DUBBO_REGISTRY_ADDRESS:}}
+    group: ${FINANCE_DUBBO_GROUP:}
+    version: ${FINANCE_DUBBO_VERSION:1.0.0-digital}
+    default-timeout-ms: ${FINANCE_DUBBO_TIMEOUT_MS:${dubbo.consumer.timeout:${dubbo.timeout:8000}}}
+    reference-parameters:
+      env: ${FINANCE_DUBBO_REFERENCE_ENV:${dubbo.reference.env:${dubbo.env:beijing}}}
+    interfaces:
+      finance-contract-mobile: cn.gov.zcy.finance.contract.facade.FinanceContractMobileFacade
+      finance-contract: cn.gov.zcy.finance.contract.facade.FinanceContractFacade
+      digit-contract: cn.gov.zcy.finance.contract.facade.DigitContractFacade
+      receipt: cn.gov.zcy.finance.receipt.facade.ReceiptFacade
+      contract-common: cn.gov.zcy.finance.contract.facade.ContractCommonFacade
+      finance-department: cn.gov.zcy.finance.contract.facade.FinanceDepartmentFacade
+      finance-product: cn.gov.zcy.finance.contract.facade.FinanceProductFacade
+      contract-prod-line: cn.gov.zcy.finance.contract.facade.ContractProdLineFacade
+      project-library: cn.gov.zcy.finance.contract.facade.ProjectLibraryFacade
+      bank-transaction: cn.gov.zcy.finance.contract.facade.BankTransactionFacade
+      ar-dashboard: com.zcy.finance.api.ArDashboardService
+      ar-ap: com.zcy.finance.api.ArApService
+      account-mapping: com.zcy.finance.api.AccountMappingService
+      voucher: com.zcy.finance.api.VoucherService
+      invoice: com.zcy.finance.api.InvoiceService
+      report: com.zcy.finance.api.ReportService
+      analysis: com.zcy.finance.api.AnalysisService
+      budget: com.zcy.finance.api.BudgetControlService
+      expense: com.zcy.finance.api.ExpenseService
+      tax: com.zcy.finance.api.TaxService
+      bank: com.zcy.finance.api.BankReconciliationService
+      compliance: com.zcy.finance.api.ComplianceRiskService
+      cash: com.zcy.finance.api.CashManagementService
+      contract-asset: com.zcy.finance.api.ContractAssetService
+      data-integration: com.zcy.finance.api.DataIntegrationService
+      month-end-close: com.zcy.finance.api.MonthEndCloseService
+      audit-log: com.zcy.finance.api.AuditLogService

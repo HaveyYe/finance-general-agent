@@ -1,0 +1,14 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "query_data_integration",
+    "arguments": {
+      "period": "2026-06",
+      "systemType": "all",
+      "syncMode": "all",
+      "includeQualityDetails": true
+    }
+  }
+}

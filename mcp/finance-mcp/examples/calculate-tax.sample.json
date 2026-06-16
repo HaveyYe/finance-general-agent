@@ -1,0 +1,15 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "calculate_tax",
+    "arguments": {
+      "taxType": "VAT",
+      "period": "2026-05",
+      "taxableAmount": 1286500,
+      "taxRate": 0.13,
+      "deductibleAmount": 102430
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "jsonrpc": "2.0",
+  "id": 4001,
+  "method": "tools/call",
+  "params": {
+    "name": "extract_text_from_screenshot",
+    "arguments": {
+      "imageUrl": "demo://invoice"
+    }
+  }
+}

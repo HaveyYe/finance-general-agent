@@ -1,0 +1,12 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2043,
+  "method": "tools/call",
+  "params": {
+    "name": "query_budget_remaining",
+    "arguments": {
+      "department": "销售部",
+      "period": "2026-05"
+    }
+  }
+}

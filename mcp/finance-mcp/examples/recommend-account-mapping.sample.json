@@ -1,0 +1,19 @@
+{
+  "jsonrpc": "2.0",
+  "id": 24,
+  "method": "tools/call",
+  "params": {
+    "name": "recommend_account_mapping",
+    "arguments": {
+      "documentType": "invoice",
+      "businessScenario": "general",
+      "summary": "上海数科服务有限公司软件服务费发票，需推荐管理费用科目",
+      "counterpartyName": "上海数科服务有限公司",
+      "department": "销售部",
+      "projectCode": "PRJ-2026-SALES",
+      "amount": 42000,
+      "taxAmount": 5460,
+      "includeVoucherPreview": true
+    }
+  }
+}

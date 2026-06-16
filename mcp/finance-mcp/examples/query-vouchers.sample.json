@@ -1,0 +1,13 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "query_vouchers",
+    "arguments": {
+      "period": "2026-05",
+      "pageNo": 1,
+      "pageSize": 10
+    }
+  }
+}

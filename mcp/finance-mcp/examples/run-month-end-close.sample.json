@@ -1,0 +1,15 @@
+{
+  "jsonrpc": "2.0",
+  "id": 23,
+  "method": "tools/call",
+  "params": {
+    "name": "run_month_end_close",
+    "arguments": {
+      "period": "2026-05",
+      "entityName": "杭州未来制造有限公司",
+      "closeType": "MONTHLY",
+      "includeChecklist": true,
+      "forceClose": false
+    }
+  }
+}

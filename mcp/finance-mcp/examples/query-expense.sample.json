@@ -1,0 +1,11 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2006,
+  "method": "tools/call",
+  "params": {
+    "name": "query_expense",
+    "arguments": {
+      "status": "PENDING"
+    }
+  }
+}

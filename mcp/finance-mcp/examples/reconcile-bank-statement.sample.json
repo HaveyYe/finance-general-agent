@@ -1,0 +1,12 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "reconcile_bank_statement",
+    "arguments": {
+      "accountNo": "6222-0001",
+      "period": "2026-05"
+    }
+  }
+}

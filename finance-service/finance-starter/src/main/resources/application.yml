@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: finance-service
+  datasource:
+    url: jdbc:h2:mem:finance-demo;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:data/demo-data.sql
+  cache:
+    type: simple
+    cache-names: balanceSheet,incomeStatement,cashFlowStatement
+
+dubbo:
+  application:
+    name: finance-service
+    qos-enable: false
+  protocol:
+    name: dubbo
+    port: 20880
+  registry:
+    address: N/A
+  provider:
+    timeout: 5000
+
+logging:
+  level:
+    root: INFO
+    org.apache.dubbo: INFO
+
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+  datasource:
+    url: ${FINANCE_MYSQL_URL:jdbc:mysql://127.0.0.1:3306/finance_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai}
+    username: ${FINANCE_MYSQL_USERNAME:finance}
+    password: ${FINANCE_MYSQL_PASSWORD:finance}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: never
+  cache:
+    type: redis
+    redis:
+      time-to-live: 300000
+  redis:
+    host: ${FINANCE_REDIS_HOST:127.0.0.1}
+    port: ${FINANCE_REDIS_PORT:6379}
+    password: ${FINANCE_REDIS_PASSWORD:}

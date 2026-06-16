@@ -1,0 +1,14 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2039,
+  "method": "tools/call",
+  "params": {
+    "name": "query_ar_ap_aging",
+    "arguments": {
+      "type": "AR",
+      "baseDate": "2026-05-31",
+      "pageNo": 1,
+      "pageSize": 20
+    }
+  }
+}

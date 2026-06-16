@@ -1,0 +1,94 @@
+services:
+  finance:
+    url: http://localhost:8086/mcp
+    timeoutMs: 8000
+    # finance-mcp 开启鉴权后可设置环境变量 FINANCE_MCP_TOKEN，并取消下一行注释。
+    # authTokenEnv: FINANCE_MCP_TOKEN
+    tools:
+      - query_ar_dashboard
+      - query_ar_ap_aging
+      - suggest_collection_advice
+      - reconcile_ar_ap
+      - generate_collection_plan
+      - optimize_payment_plan
+      - reconcile_counterparty_balance
+      - recommend_account_mapping
+      - create_voucher
+      - get_voucher
+      - query_vouchers
+      - audit_voucher
+      - audit_voucher_by_no
+      - query_invoice
+      - check_invoice
+      - input_invoice
+      - check_invoice_duplicate
+      - verify_invoice
+      - generate_report
+      - get_balance_sheet
+      - get_income_statement
+      - get_cash_flow_statement
+      - analyze_financial
+      - calculate_financial_ratios
+      - analyze_financial_trend
+      - detect_financial_anomalies
+      - diagnose_financial_variance
+      - evaluate_budget_control
+      - create_expense
+      - query_expense
+      - approve_expense
+      - query_budget_remaining
+      - calculate_tax
+      - generate_tax_return
+      - query_bank_transactions
+      - reconcile_bank_statement
+      - assess_compliance_risk
+      - forecast_cash_flow
+      - query_contract_assets
+      - query_data_integration
+      - run_month_end_close
+      - record_audit_log
+      - query_audit_logs
+      - dubbo_call
+  zai-vision:
+    url: http://localhost:8088/mcp
+    timeoutMs: 3000
+    tools:
+      - analyze_image
+      - extract_text_from_screenshot
+      - analyze_video
+      - analyze_data_visualization
+      - diagnose_error_screenshot
+      - ui_diff_check
+      - understand_technical_diagram
+      - ui_to_artifact
+  web-reader:
+    url: http://localhost:8089/mcp
+    timeoutMs: 3000
+    tools:
+      - webReader
+  browser:
+    url: http://localhost:8090/mcp
+    timeoutMs: 3000
+    tools:
+      - navigate
+      - click
+      - type
+      - snapshot
+      - screenshot
+      - scroll
+      - fill_form
+      - upload_file
+      - wait_for
+      - select_option
+      - check
+      - uncheck
+      - press_key
+      - hover
+      - evaluate
+      - get_text
+      - get_attribute
+      - back
+      - forward
+      - reload
+      - close_session
+      - list_sessions

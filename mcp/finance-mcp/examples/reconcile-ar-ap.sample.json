@@ -1,0 +1,12 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2041,
+  "method": "tools/call",
+  "params": {
+    "name": "reconcile_ar_ap",
+    "arguments": {
+      "partnerId": "C1001",
+      "period": "2026-05"
+    }
+  }
+}

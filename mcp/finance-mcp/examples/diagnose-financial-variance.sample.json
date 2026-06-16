@@ -1,0 +1,17 @@
+{
+  "jsonrpc": "2.0",
+  "id": 26,
+  "method": "tools/call",
+  "params": {
+    "name": "diagnose_financial_variance",
+    "arguments": {
+      "period": "2026-05",
+      "metricName": "销售费用",
+      "department": "销售部",
+      "actualAmount": 286000,
+      "budgetAmount": 240000,
+      "previousAmount": 255000,
+      "includeActionPlan": true
+    }
+  }
+}

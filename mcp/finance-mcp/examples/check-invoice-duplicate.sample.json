@@ -1,0 +1,18 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "check_invoice_duplicate",
+    "arguments": {
+      "invoiceCode": "CODE-INV-202605-001",
+      "invoiceNo": "INV-202605-001",
+      "invoiceDate": "2026-05-03",
+      "invoiceType": "增值税专用发票",
+      "sellerName": "浙江智造设备有限公司",
+      "amount": 86000,
+      "taxAmount": 11180,
+      "fileHash": "HASH-INV-202605-001"
+    }
+  }
+}

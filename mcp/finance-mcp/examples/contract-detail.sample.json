@@ -1,0 +1,11 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "contract.detail",
+    "arguments": {
+      "contractNo": "HT202606090001"
+    }
+  }
+}

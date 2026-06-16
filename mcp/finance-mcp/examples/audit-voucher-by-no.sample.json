@@ -1,0 +1,12 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2045,
+  "method": "tools/call",
+  "params": {
+    "name": "audit_voucher_by_no",
+    "arguments": {
+      "voucherNo": "V-20260528-0002",
+      "auditor": "E2001"
+    }
+  }
+}

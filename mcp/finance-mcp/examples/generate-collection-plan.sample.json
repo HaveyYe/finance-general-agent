@@ -1,0 +1,17 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "generate_collection_plan",
+    "arguments": {
+      "period": "2026-05",
+      "customerName": "浙江智造设备有限公司",
+      "creditLevel": "C",
+      "overdueAmount": 218900,
+      "overdueDays": 35,
+      "owner": "应收会计",
+      "includeLetter": true
+    }
+  }
+}

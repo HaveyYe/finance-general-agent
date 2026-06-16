@@ -1,0 +1,11 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2001,
+  "method": "tools/call",
+  "params": {
+    "name": "query_ar_dashboard",
+    "arguments": {
+      "month": "2026-05"
+    }
+  }
+}

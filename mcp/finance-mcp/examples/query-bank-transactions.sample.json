@@ -1,0 +1,12 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "query_bank_transactions",
+    "arguments": {
+      "accountNo": "6222-0001",
+      "status": "UNMATCHED"
+    }
+  }
+}

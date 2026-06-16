@@ -1,0 +1,13 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2037,
+  "method": "tools/call",
+  "params": {
+    "name": "analyze_financial_trend",
+    "arguments": {
+      "startDate": "2026-01",
+      "endDate": "2026-05",
+      "metric": "营业收入"
+    }
+  }
+}

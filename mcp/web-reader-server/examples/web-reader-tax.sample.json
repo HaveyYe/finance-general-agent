@@ -1,0 +1,12 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "webReader",
+    "arguments": {
+      "url": "https://www.chinatax.gov.cn/",
+      "keyword": "增值税税率政策"
+    }
+  }
+}

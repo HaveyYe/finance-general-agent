@@ -1,0 +1,12 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2002,
+  "method": "tools/call",
+  "params": {
+    "name": "generate_report",
+    "arguments": {
+      "reportType": "balance_sheet",
+      "period": "2026-05"
+    }
+  }
+}

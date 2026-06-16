@@ -1,0 +1,30 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "approve_expense",
+    "arguments": {
+      "expenseNo": "EXP-202605-002",
+      "employeeId": "E1002",
+      "employeeName": "李四",
+      "employeeLevel": "staff",
+      "department": "销售部",
+      "projectCode": "PRJ-2026-SALES",
+      "expenseType": "采购",
+      "cityTier": "二线",
+      "submitDate": "2026-05-16",
+      "invoiceNo": "INV-202605-001",
+      "purchaseOrderNo": "PO-202605-009",
+      "receiptNo": "GR-202605-007",
+      "description": "采购类报销，需检查三单匹配、预算和发票风险",
+      "amount": 8600,
+      "invoiceAmount": 8600,
+      "orderAmount": 10100,
+      "receiptAmount": 7700,
+      "availableBudget": 7600,
+      "invoiceVerified": true,
+      "duplicateInvoice": true
+    }
+  }
+}

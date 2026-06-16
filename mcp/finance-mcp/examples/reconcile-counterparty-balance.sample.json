@@ -1,0 +1,16 @@
+{
+  "jsonrpc": "2.0",
+  "id": 25,
+  "method": "tools/call",
+  "params": {
+    "name": "reconcile_counterparty_balance",
+    "arguments": {
+      "period": "2026-05",
+      "counterpartyName": "浙江智造设备有限公司",
+      "counterpartyType": "CUSTOMER",
+      "internalBalance": 218900,
+      "counterpartyBalance": 204300,
+      "includeConfirmationLetter": true
+    }
+  }
+}

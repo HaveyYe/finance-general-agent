@@ -1,0 +1,11 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2036,
+  "method": "tools/call",
+  "params": {
+    "name": "calculate_financial_ratios",
+    "arguments": {
+      "period": "2026-05"
+    }
+  }
+}

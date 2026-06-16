@@ -1,0 +1,11 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2038,
+  "method": "tools/call",
+  "params": {
+    "name": "detect_financial_anomalies",
+    "arguments": {
+      "period": "2026-05"
+    }
+  }
+}

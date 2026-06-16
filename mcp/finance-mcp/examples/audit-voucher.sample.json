@@ -1,0 +1,41 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "audit_voucher",
+    "arguments": {
+      "voucherNo": "V-20260531-AUDIT",
+      "voucherDate": "2026-05-31",
+      "summary": "采购发票自动凭证审核",
+      "businessType": "purchase",
+      "period": "2026-05",
+      "documentDate": "2026-04-30",
+      "relatedInvoiceNo": "INV-202605-001",
+      "purchaseOrderNo": "PO-202605-009",
+      "receiptNo": "GR-202605-007",
+      "supplierName": "浙江智造设备有限公司",
+      "department": "制造部",
+      "preparerId": "E1001",
+      "reviewerId": "E1001",
+      "invoiceAmount": 126000,
+      "orderAmount": 129200,
+      "receiptAmount": 124200,
+      "budgetAmount": 116000,
+      "entries": [
+        {
+          "accountCode": "6601",
+          "accountName": "销售费用",
+          "debitAmount": 126000,
+          "creditAmount": 1200
+        },
+        {
+          "accountCode": "2202",
+          "accountName": "应付账款",
+          "debitAmount": 0,
+          "creditAmount": 125500
+        }
+      ]
+    }
+  }
+}

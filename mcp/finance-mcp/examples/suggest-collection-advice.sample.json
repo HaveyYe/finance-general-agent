@@ -1,0 +1,11 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2040,
+  "method": "tools/call",
+  "params": {
+    "name": "suggest_collection_advice",
+    "arguments": {
+      "customerId": "C1001"
+    }
+  }
+}

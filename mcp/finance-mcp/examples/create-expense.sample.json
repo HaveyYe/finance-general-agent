@@ -1,0 +1,21 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2042,
+  "method": "tools/call",
+  "params": {
+    "name": "create_expense",
+    "arguments": {
+      "employeeId": "E1002",
+      "employeeName": "李四",
+      "department": "销售部",
+      "projectCode": "PRJ-2026-SALES",
+      "expenseType": "差旅",
+      "expenseDate": "2026-05-28",
+      "description": "华东客户现场拜访差旅",
+      "amount": 3600,
+      "invoiceNos": ["INV-202606-009"],
+      "attachments": ["trip-order-009.pdf"],
+      "submitForApproval": true
+    }
+  }
+}

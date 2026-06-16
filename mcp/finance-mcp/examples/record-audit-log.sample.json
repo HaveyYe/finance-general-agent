@@ -1,0 +1,24 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "record_audit_log",
+    "arguments": {
+      "traceId": "trace-demo-001",
+      "sessionId": "demo-session",
+      "channel": "dingtalk",
+      "corpId": "demo-corp",
+      "userId": "zhangsan",
+      "userName": "张三",
+      "requestText": "帮我查一下本月应收账款",
+      "toolName": "query_ar_dashboard",
+      "serviceName": "finance",
+      "requestArgs": "{\"month\":\"2026-05\"}",
+      "responseSummary": "已查询 2026-05 应收看板，应收余额 1250000，回款率 82.5%。",
+      "status": "success",
+      "durationMs": 82,
+      "occurredAt": "2026-06-03 09:30:00"
+    }
+  }
+}

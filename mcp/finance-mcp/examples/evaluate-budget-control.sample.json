@@ -1,0 +1,17 @@
+{
+  "jsonrpc": "2.0",
+  "id": 22,
+  "method": "tools/call",
+  "params": {
+    "name": "evaluate_budget_control",
+    "arguments": {
+      "period": "2026-05",
+      "department": "销售部",
+      "projectCode": "PRJ-2026-SALES",
+      "expenseType": "差旅",
+      "requestedAmount": 98000,
+      "scenario": "stress",
+      "includeForecast": true
+    }
+  }
+}

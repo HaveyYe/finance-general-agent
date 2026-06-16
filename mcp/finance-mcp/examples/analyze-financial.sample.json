@@ -1,0 +1,15 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2005,
+  "method": "tools/call",
+  "params": {
+    "name": "analyze_financial",
+    "arguments": {
+      "period": "2026-05",
+      "metrics": [
+        "流动比率",
+        "回款率"
+      ]
+    }
+  }
+}

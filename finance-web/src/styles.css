@@ -1,0 +1,88 @@
+:root {
+  --bg: #eef3f1;
+  --panel: #ffffff;
+  --panel-strong: #f8fbfa;
+  --line: #d8e2df;
+  --text: #1b2b28;
+  --muted: #667772;
+  --brand: #137c6b;
+  --brand-dark: #0c5c50;
+  --accent: #b98b2f;
+  --danger: #b94444;
+  --ok: #147c45;
+  font-family: "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(19, 124, 107, 0.12), rgba(185, 139, 47, 0.08)),
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.85), transparent 28%),
+    var(--bg);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.page-subtitle {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(27, 43, 40, 0.08);
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.kpi-card {
+  padding: 16px;
+  min-height: 104px;
+}
+
+.kpi-label {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.kpi-value {
+  margin-top: 12px;
+  font-size: 26px;
+  font-weight: 760;
+}
+
+@media (max-width: 900px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}

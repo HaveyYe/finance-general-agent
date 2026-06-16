@@ -1,0 +1,11 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2004,
+  "method": "tools/call",
+  "params": {
+    "name": "query_invoice",
+    "arguments": {
+      "invoiceNo": "INV-202605"
+    }
+  }
+}

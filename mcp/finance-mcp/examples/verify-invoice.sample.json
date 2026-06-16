@@ -1,0 +1,16 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "verify_invoice",
+    "arguments": {
+      "invoiceNo": "INV-202605-003",
+      "invoiceType": "增值税专用发票",
+      "amount": 12800,
+      "taxAmount": 768,
+      "includeDeductionCheck": true,
+      "includeArchiveCheck": true
+    }
+  }
+}
