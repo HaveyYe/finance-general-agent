@@ -1,6 +1,6 @@
 # Finance General Agent Streamlit
 
-Streamlit 版入口复用现有 MCP Gateway，不重新实现财务业务逻辑。
+Streamlit 版入口是原生 Streamlit 页面。MCP Gateway 在线时调用真实 Agent、财务工具和知识库；MCP Gateway 不在线时自动降级到本地 Demo 模式，不依赖 Vue 前端。
 
 ## Run
 

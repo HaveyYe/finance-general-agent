@@ -292,6 +292,33 @@ public class ToolRegistry {
     private void registerFinanceDemoTools() {
         FinanceDubboProperties.Interfaces interfaces = properties.getInterfaces();
 
+        register(financeFieldTool(
+                "query_ar_dashboard",
+                "查询应收看板，返回应收余额、回款率、逾期金额和账龄分布",
+                interfaces.getArDashboard(),
+                "queryOverview",
+                "month",
+                "期间，格式 YYYY-MM"
+        ));
+
+        register(financeDtoTool(
+                "query_ar_ap_aging",
+                "查询应收/应付账龄分页",
+                interfaces.getArAp(),
+                "queryAging",
+                "com.zcy.finance.api.dto.AgingQueryDTO",
+                fields(
+                        field("type", "string", "AR 表示应收，AP 表示应付"),
+                        field("baseDate", "string", "基准日期，格式 YYYY-MM-DD"),
+                        field("partnerId", "string", "往来单位 ID，可选"),
+                        field("partnerName", "string", "往来单位名称，可选"),
+                        field("pageNo", "integer", "页码"),
+                        field("pageSize", "integer", "每页条数")
+                ),
+                Collections.<String>emptyList(),
+                "read"
+        ));
+
         register(financeDtoTool(
                 "create_voucher",
                 "创建记账凭证，校验借贷平衡并返回凭证号和审核提示",
