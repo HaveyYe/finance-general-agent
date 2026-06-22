@@ -9,14 +9,22 @@ import requests
 import streamlit as st
 
 
-DEFAULT_GATEWAY_BASE_URL = os.getenv("GATEWAY_BASE_URL", "http://localhost:9000")
+def default_gateway_base_url() -> str:
+    if "GATEWAY_BASE_URL" in os.environ:
+        return os.environ["GATEWAY_BASE_URL"]
+    try:
+        return str(st.secrets.get("GATEWAY_BASE_URL", "http://localhost:9000"))
+    except Exception:
+        return "http://localhost:9000"
+
+
+DEFAULT_GATEWAY_BASE_URL = default_gateway_base_url()
 DEFAULT_USER_ID = os.getenv("STREAMLIT_USER_ID", "streamlit-user")
 DEFAULT_USER_NAME = os.getenv("STREAMLIT_USER_NAME", "Streamlit 用户")
 WELCOME = (
     "你好，我是财务数智人。你可以直接询问财务报表、发票、凭证、报销、预算、"
     "应收应付、知识库制度等问题。"
 )
-LOCAL_MODE_NOTICE = "当前未连接 MCP Gateway，已切换到 Streamlit 本地 Demo 模式。"
 
 
 st.set_page_config(page_title="财务数智人", layout="wide")
@@ -59,77 +67,7 @@ def check_gateway() -> Tuple[bool, str]:
             return True, "已连接"
         return False, f"HTTP {response.status_code}"
     except requests.RequestException as exc:
-        return False, f"未连接：{exc.__class__.__name__}"
-
-
-def local_agent_response(prompt: str) -> Dict[str, Any]:
-    normalized = prompt.strip()
-    if "应收" in normalized or "账龄" in normalized:
-        rows = [
-            {"客户": "杭州云帆科技", "账龄": "0-30天", "应收金额": 328000, "风险": "低"},
-            {"客户": "上海星河制造", "账龄": "31-60天", "应收金额": 186500, "风险": "中"},
-            {"客户": "宁波启明贸易", "账龄": "90天以上", "应收金额": 74200, "风险": "高"},
-        ]
-        return {
-            "text": "本地 Demo 结果：2026-05 应收账龄整体可控，但 90 天以上款项需要优先跟进。",
-            "type": "table",
-            "content": rows,
-            "callChain": [],
-        }
-    if "资产负债" in normalized or "报表" in normalized:
-        return {
-            "text": "本地 Demo 结果：2026-05 资产负债表试算平衡，资产总额 12,860,000 元，负债合计 7,420,000 元，所有者权益 5,440,000 元。",
-            "type": "card",
-            "content": {
-                "period": "2026-05",
-                "assets": 12860000,
-                "liabilities": 7420000,
-                "equity": 5440000,
-                "balanced": True,
-            },
-            "callChain": [],
-        }
-    if "指标" in normalized or "分析" in normalized:
-        return {
-            "text": "本地 Demo 结果：流动比率保持在 1.8 左右，回款率较上月改善，费用率略有上升。",
-            "type": "chart",
-            "content": {
-                "series": [
-                    {"month": "2026-03", "流动比率": 1.62, "回款率": 0.81},
-                    {"month": "2026-04", "流动比率": 1.74, "回款率": 0.84},
-                    {"month": "2026-05", "流动比率": 1.81, "回款率": 0.88},
-                ]
-            },
-            "callChain": [],
-        }
-    if "报销" in normalized:
-        rows = [
-            {"单号": "EXP-202605-001", "申请人": "张三", "金额": 1280, "状态": "PENDING"},
-            {"单号": "EXP-202605-002", "申请人": "李四", "金额": 560, "状态": "NEED_REVIEW"},
-        ]
-        return {
-            "text": "本地 Demo 结果：当前有 2 笔报销待处理，其中 1 笔需要复核。",
-            "type": "table",
-            "content": rows,
-            "callChain": [],
-        }
-    if "凭证" in normalized:
-        rows = [
-            {"凭证号": "V-202605-001", "日期": "2026-05-31", "摘要": "销售回款入账", "状态": "已审核"},
-            {"凭证号": "V-202605-002", "日期": "2026-05-31", "摘要": "费用报销入账", "状态": "待审核"},
-        ]
-        return {
-            "text": "本地 Demo 结果：最近凭证台账如下，待审核凭证建议先校验借贷平衡和附件完整性。",
-            "type": "table",
-            "content": rows,
-            "callChain": [],
-        }
-    return {
-        "text": f"{LOCAL_MODE_NOTICE} 你刚才的问题是：{normalized}。如需真实工具调用和知识库检索，请先启动 `scripts/start-all.sh --streamlit`。",
-        "type": "text",
-        "content": None,
-        "callChain": [],
-    }
+        return False, f"未连接：{exc}"
 
 
 def prepare_session() -> str:
@@ -240,17 +178,12 @@ def send_prompt(prompt: str) -> None:
     with st.chat_message("assistant"):
         gateway_ok, _ = check_gateway()
         if not gateway_ok:
-            response = local_agent_response(prompt)
-            st.markdown(response["text"])
-            assistant_message = {
-                "role": "assistant",
-                "content": response["text"],
-                "type": response["type"],
-                "data": response.get("content"),
-                "call_chain": response.get("callChain"),
-            }
-            render_structured(assistant_message)
-            st.session_state.messages.append(assistant_message)
+            assistant_text = (
+                "MCP Gateway 未连接。请在 Streamlit 部署环境里配置公网可访问的 "
+                "`GATEWAY_BASE_URL`，不能使用 `localhost:9000` 指向你本机服务。"
+            )
+            st.error(assistant_text)
+            append_message("assistant", assistant_text)
             return
 
         status = st.empty()
@@ -309,7 +242,8 @@ def sidebar() -> None:
         if ok:
             st.success(detail)
         else:
-            st.warning(f"{detail}，使用本地 Demo 模式")
+            st.error(detail)
+            st.caption("Streamlit 云端部署不能访问你电脑上的 localhost:9000，请配置公网 Gateway 地址。")
 
         if st.button("新建会话", use_container_width=True):
             st.session_state.gateway_session_id = ""
